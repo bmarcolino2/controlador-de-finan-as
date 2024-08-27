@@ -4,72 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Controle de Finanças</title>
-    <style>
-        body {
-            background-color: rgb(45, 211, 111);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        form {
-            width: 300px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        input, button {
-            padding: 10px;
-            margin-bottom: 10px;
-            width: 100%;
-            box-sizing: border-box;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-        button {
-            cursor: pointer;
-        }
-        button:active {
-            opacity: 1;
-        }
-        button[disabled] {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        .clear {
-            background: transparent;
-            color: #333;
-            border: 1px solid #333;
-        }
-        .solid {
-            background: #333;
-            color: white;
-            border: none;
-        }
-        .outline {
-            background: transparent;
-            color: #333;
-            border: 1px solid #333;
-        }
-        #email-error, #password-error {
-            color: red;
-            font-size: 0.9em;
-            display: none;
-            transition: opacity 0.5s;
-            opacity: 0;
-        }
-        #email-error.show, #password-error.show {
-            opacity: 1;
-        }
-        @media (max-width: 600px) {
-            form {
-                width: 100%;
-                padding: 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <form onsubmit="submitForm(); return false;">
@@ -96,64 +31,6 @@
             <button type="button" class="outline" disabled="true">Registrar</button>
         </div>
     </form>
-    <script>
-        // Preencher o campo de email se estiver armazenado no localStorage
-        document.getElementById('email').value = localStorage.getItem('email') || '';
-
-        function validateFields() {
-            const emailValid = isEmailValid();
-            const passwordValid = isPasswordValid();
-
-            // Armazenar o email se a opção "Lembrar de mim" estiver marcada
-            if (document.getElementById('remember-me').checked && emailValid) {
-                localStorage.setItem('email', document.getElementById('email').value);
-            }
-
-            document.getElementById('password-button').disabled = !emailValid;
-            document.getElementById('login-button').disabled = !emailValid || !passwordValid;
-        }
-
-        function isEmailValid() {
-            const email = document.getElementById("email").value;
-            const isValid = validateEmail(email);
-            document.getElementById("email-error").style.display = isValid ? "none" : "block";
-            document.getElementById("email-error").classList.toggle('show', !isValid);
-            return isValid;
-        }
-
-        function isPasswordValid() {
-            const password = document.getElementById('password').value;
-            const isValid = password.length >= 8 && /\d/.test(password) && /[!@#$%^&*]/.test(password);
-            document.getElementById("password-error").style.display = isValid ? "none" : "block";
-            document.getElementById("password-error").classList.toggle('show', !isValid);
-            return isValid;
-        }
-
-        function validateEmail(email) {
-            return /\S+@\S+\.\S+/.test(email);
-        }
-
-        function submitForm() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            // Simulação de envio ao backend
-            fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            }).then(response => response.json())
-              .then(data => {
-                  if (data.success) {
-                      alert('Login realizado com sucesso!');
-                      // Redirecionar ou mostrar mensagem de sucesso
-                  } else {
-                      alert('Erro ao fazer login. Verifique suas credenciais.');
-                  }
-              });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

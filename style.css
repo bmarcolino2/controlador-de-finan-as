@@ -1,43 +1,64 @@
-body{
+body {
     background-color: rgb(45, 211, 111);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
-
-form{
+form {
     width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-input, button{
-padding: 10px;
-margin-bottom: 10px;
-width: -webkit-fill-available;
+input, button {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
-
-button{
-    cursor: pointer;}
-
-button :active {
+button {
+    cursor: pointer;
+}
+button:active {
     opacity: 1;
 }
-
 button[disabled] {
     opacity: 0.7;
+    cursor: not-allowed;
 }
 .clear {
     background: transparent;
-    color: white;
-    border: 1px solid white;
+    color: #333;
+    border: 1px solid #333;
 }
-
 .solid {
-    background: white;
+    background: #333;
+    color: white;
     border: none;
 }
-
 .outline {
     background: transparent;
-    color: white;
-    border: 1px solid white;
+    color: #333;
+    border: 1px solid #333;
+}
+#email-error, #password-error {
+    color: red;
+    font-size: 0.9em;
+    display: none;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+#email-error.show, #password-error.show {
+    opacity: 1;
+}
+@media (max-width: 600px) {
+    form {
+        width: 100%;
+        padding: 10px;
+    }
 }
